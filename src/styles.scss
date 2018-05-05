@@ -1,1 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
+@import './scss-imports';
+
+* {
+  box-sizing: border-box;
+}
+
+$root-font-size: 16px;
+
+$header-height: 4rem;
+$header-row-padding: 0 2rem;
+
+$nav-left-offset: 8rem;
+$nav-right-offset: 5rem;
+$nav-left-padding: $nav-right-offset - $nav-left-offset;
+$nav-right-padding: $nav-left-offset - $nav-right-offset;
+$nav-border: 1px solid white;
+
+$nav-tab-initial-background: rgba(255,255,255,0);
+$nav-tab-final-background: rgba(255,255,255,.2);
+$nav-tab-transition: background .3s;
+
+$nab-tab-border-bottom-height: 2px;
+$nab-tab-border-bottom-initial-right: 100%;
+$nab-tab-border-bottom-final-right: 0;
+$nab-tab-border-bottom-transition: right .2s;
+
+$size-25percent: 25%;
+$size-50percent: 50%;
+$size-100percent: 100%;
+
+$weight-300: 300;
+$weight-400: 400;
+$weight-500: 500;
+$weight-600: 600;
+
+html {
+  font-size: $root-font-size;
+}
+
+// Nav
+.alo-nav {
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: $nav-left-offset auto $nav-right-offset;
+  border-bottom: $nav-border;
+
+  // NAV INNERS
+  > div {
+    height: $size-100percent;
+  }
+  
+  &.alo-second-nav {
+    grid-template-columns: auto $nav-right-offset;
+
+    .alo-nav-tabs {
+      margin-left: $nav-left-offset;
+    }
+  }
+
+  .alo-logo {
+    // TODO - Delete background on finished nav
+    // background-color: orange;
+  }
+
+  // NAV TABS
+  .alo-nav-tabs {
+    display: flex;
+    padding-left: $nav-left-padding;
+    padding-right: $nav-right-padding;
+    justify-content: center;
+
+    // TAB
+    .alo-tab {
+      display: block;
+      position: relative;
+      height: $header-height;
+      padding: $header-row-padding;
+      line-height: $header-height;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: white;
+      background: $nav-tab-initial-background;
+      transition: $nav-tab-transition;
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: $nab-tab-border-bottom-height;
+        background: white;
+        left: 0;
+        right: $nab-tab-border-bottom-initial-right;
+        bottom: 0;
+        z-index: 1;
+        transition: $nab-tab-border-bottom-transition;
+      }
+
+      &:active {
+        background: $nav-tab-final-background;
+      }
+    }
+
+    // ACTIVE AND HOVER TAB
+    .alo-tab:hover {
+      font-weight: inherit;
+
+      &::after {
+        right: $nab-tab-border-bottom-final-right;
+      }
+    }
+    .alo-tab.alo-tab__active {
+      font-weight: $weight-600;
+
+      &::after {
+        right: $nab-tab-border-bottom-final-right;
+      }
+    }
+  }
+
+  .alo-common-links {
+    // TODO - Delete background on finished nav 
+    // background-color: orange;
+  }
+}
